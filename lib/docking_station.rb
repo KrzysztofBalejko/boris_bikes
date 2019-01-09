@@ -10,4 +10,7 @@ class DockingStation
 
   end
 
+  def bike
+  end
+
 end
