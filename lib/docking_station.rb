@@ -8,11 +8,13 @@ class DockingStation
     if @bike == nil
       fail 'no bikes!'
     end
-
     Bike.new
   end
 
   def dock(bike)
+    if @bike == bike
+      fail 'Rack is full!'
+    end
     @bike = bike
   end
 end
