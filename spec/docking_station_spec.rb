@@ -39,4 +39,11 @@ RSpec.describe DockingStation do
     docking_station = DockingStation.new
     expect(docking_station.bikes).to eq Array.new
   end
+
+  it 'removes a bike from the array when release_bike' do
+    docking_station = DockingStation.new
+    docking_station.dock(Bike.new)
+    docking_station.release_bike
+    expect(docking_station.bikes.count).to eq 0
+  end
 end
