@@ -2,13 +2,16 @@ require 'docking_station.rb'
 
 
 RSpec.describe DockingStation do
+  before do
+    @docking_station = DockingStation.new
+  end
+
 
   it { is_expected.to respond_to(:release_bike) }
 
   it 'releases working bikes' do
-    docking_station = DockingStation.new
-    docking_station.instance_variable_set(:@bikes, [Bike.new, Bike.new])
-    bike = docking_station.release_bike
+    @docking_station.instance_variable_set(:@bikes, [Bike.new, Bike.new])
+    bike = @docking_station.release_bike
     expect(bike.working?).to eq (true)
   end
 
@@ -24,43 +27,41 @@ RSpec.describe DockingStation do
   end
 
   it 'raises an error if station is empty' do
-    docking_station = DockingStation.new
-    expect { docking_station.release_bike }.to raise_error('no bikes!')
+    expect { @docking_station.release_bike }.to raise_error('no bikes!')
   end
 
   it 'raises an error if station is full' do
-    docking_station = DockingStation.new
-    docking_station.capacity.times { docking_station.dock(Bike.new) }
-    expect { docking_station.dock(Bike.new) }.to raise_error('Rack is full!')
+    @docking_station.capacity.times { @docking_station.dock(Bike.new) }
+    expect { @docking_station.dock(Bike.new) }.to raise_error('Rack is full!')
   end
 
   it 'returns an empty array' do
-    docking_station = DockingStation.new
-    expect(docking_station.bikes).to eq Array.new
+    expect(@docking_station.bikes).to eq Array.new
   end
 
   it 'removes a bike from the array when release_bike' do
-    docking_station = DockingStation.new
-    docking_station.dock(Bike.new)
-    docking_station.release_bike
-    expect(docking_station.bikes.count).to eq 0
+    @docking_station.dock(Bike.new)
+    @docking_station.release_bike
+    expect(@docking_station.bikes.count).to eq 0
   end
 
   it 'docks a bike when it is partly full' do
-    docking_station = DockingStation.new
-    docking_station.dock(Bike.new)
-    docking_station.dock(Bike.new)
-    expect(docking_station.bikes.count).to eq 2
+    @docking_station.dock(Bike.new)
+    @docking_station.dock(Bike.new)
+    expect(@docking_station.bikes.count).to eq 2
   end
 
   it 'allows user to set capacity instance variable on initialization' do
-    docking_station = DockingStation.new(23)
-    expect(docking_station.capacity).to eq 23
+    @docking_station = DockingStation.new(23)
+    expect(@docking_station.capacity).to eq 23
   end
 
   it 'has a default capacity of 20' do
-    docking_station = DockingStation.new
-    expect(docking_station.capacity).to eq DockingStation::DEFAULT_CAPACITY
+    expect(@docking_station.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
+  it 'allows to report on broken bike' do
+    expect{ @docking_station.report }.to output(/Is everything ok with your bike/).to_stdout
   end
 
 end
