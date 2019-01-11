@@ -8,8 +8,7 @@ class DockingStation
   end
 
   def release_bike
-
-    if @bikes == []
+    if empty?
       fail 'no bikes!'
     end
     @bikes.pop
@@ -24,6 +23,14 @@ class DockingStation
 
   def full?
     if @bikes.count >= 20
+      return true
+    else
+      return false
+    end
+  end
+
+  def empty?
+    if @bikes == []
       return true
     else
       return false
