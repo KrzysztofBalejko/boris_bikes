@@ -16,9 +16,18 @@ class DockingStation
   end
 
   def dock(bike)
-    if @bikes.length >= 20
+    if full?
       fail 'Rack is full!'
     end
     @bikes << bike
   end
+
+  def full?
+    if @bikes.count >= 20
+      return true
+    else
+      return false
+    end
+  end
+
 end
