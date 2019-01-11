@@ -8,11 +8,12 @@ class DockingStation
   end
 
   def release_bike
-    
+
     if @bikes == []
       fail 'no bikes!'
     end
-    Bike.new
+    # Bike.new
+    @bikes.pop
   end
 
   def dock(bike)
