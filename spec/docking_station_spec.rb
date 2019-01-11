@@ -57,4 +57,10 @@ RSpec.describe DockingStation do
     docking_station = DockingStation.new(23)
     expect(docking_station.capacity).to eq 23
   end
+
+  it 'has a default capacity of 20' do
+    docking_station = DockingStation.new
+    expect(docking_station.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
 end
