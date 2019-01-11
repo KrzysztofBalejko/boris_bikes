@@ -30,7 +30,7 @@ RSpec.describe DockingStation do
 
   it 'raises an error if station is full' do
     docking_station = DockingStation.new
-    DockingStation::DEFAULT_CAPACITY.times { docking_station.dock(Bike.new) }
+    docking_station.capacity.times { docking_station.dock(Bike.new) }
     expect { docking_station.dock(Bike.new) }.to raise_error('Rack is full!')
   end
 
@@ -51,5 +51,10 @@ RSpec.describe DockingStation do
     docking_station.dock(Bike.new)
     docking_station.dock(Bike.new)
     expect(docking_station.bikes.count).to eq 2
+  end
+
+  it 'allows user to set capacity instance variable on initialization' do
+    docking_station = DockingStation.new(23)
+    expect(docking_station.capacity).to eq 23
   end
 end
