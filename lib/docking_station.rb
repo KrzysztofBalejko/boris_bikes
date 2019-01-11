@@ -8,7 +8,7 @@ class DockingStation
   end
 
   def release_bike
-
+    
     if @bikes == []
       fail 'no bikes!'
     end

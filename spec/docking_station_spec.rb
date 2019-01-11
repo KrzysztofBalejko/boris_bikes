@@ -5,10 +5,12 @@ RSpec.describe DockingStation do
 
   it { is_expected.to respond_to(:release_bike) }
 
-  # it 'releases working bikes' do
-  #   bike = subject.release_bike
-  #   expect(bike.working?).to eq (true)
-  # end
+  it 'releases working bikes' do
+    docking_station = DockingStation.new
+    docking_station.instance_variable_set(:@bikes, [Bike.new, Bike.new])
+    bike = docking_station.release_bike
+    expect(bike.working?).to eq (true)
+  end
 
   it 'dock a bike' do
     bike = Bike.new
