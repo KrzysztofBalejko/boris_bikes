@@ -30,8 +30,7 @@ RSpec.describe DockingStation do
 
   it 'raises an error if station is full' do
     docking_station = DockingStation.new
-    bike = Bike.new
-    docking_station.dock(Bike.new)
+    20.times { docking_station.dock(Bike.new) }
     expect { docking_station.dock(Bike.new) }.to raise_error('Rack is full!')
   end
 
@@ -45,5 +44,12 @@ RSpec.describe DockingStation do
     docking_station.dock(Bike.new)
     docking_station.release_bike
     expect(docking_station.bikes.count).to eq 0
+  end
+
+  it 'docks a bike when it is partly full' do
+    docking_station = DockingStation.new
+    docking_station.dock(Bike.new)
+    docking_station.dock(Bike.new)
+    expect(docking_station.bikes.count).to eq 2
   end
 end
