@@ -25,6 +25,10 @@ DEFAULT_CAPACITY = 20
     @bikes << bike
   end
 
+  def report
+    puts "Is everything ok with your bike ?"
+  end
+
   private
 
   def full?
