@@ -12,13 +12,13 @@ RSpec.describe DockingStation do
 
   it 'dock a bike' do
     bike = Bike.new
-    expect(subject.dock(bike)).to eq bike
+    expect(subject.dock(bike)[0]).to eq bike
   end
 
   it 'returns docked bikes' do
     bike = Bike.new
     subject.dock(bike)
-    expect(subject.bike).to eq bike
+    expect(subject.bikes[0]).to eq bike
   end
 
   it 'raises an error if station is empty' do
@@ -29,11 +29,12 @@ RSpec.describe DockingStation do
   it 'raises an error if station is full' do
     docking_station = DockingStation.new
     bike = Bike.new
-    docking_station.dock(bike)
-    expect { docking_station.dock(bike) }.to raise_error('Rack is full!')
+    docking_station.dock(Bike.new)
+    expect { docking_station.dock(Bike.new) }.to raise_error('Rack is full!')
   end
 
-
-
-
+  it 'returns an empty array' do
+    docking_station = DockingStation.new
+    expect(docking_station.bikes).to eq Array.new
+  end
 end
