@@ -60,8 +60,15 @@ RSpec.describe DockingStation do
     expect(@docking_station.capacity).to eq DockingStation::DEFAULT_CAPACITY
   end
 
-  it 'allows to report on broken bike' do
-    expect{ @docking_station.report }.to output(/Is everything ok with your bike/).to_stdout
+  # it 'allows to report on broken bike' do
+  #   expect{ @docking_station.report }.to output(/Is everything ok with your bike/).to_stdout
+  # end
+
+  it 'can be reported broken' do
+    bike = Bike.new
+    bike.report_broken
+    expect(bike).to be_broken
   end
+
 
 end
