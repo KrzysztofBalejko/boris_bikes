@@ -12,12 +12,11 @@ class DockingStation
     if @bikes == []
       fail 'no bikes!'
     end
-    # Bike.new
     @bikes.pop
   end
 
   def dock(bike)
-    if @bikes != [] || @bikes.length > 20
+    if @bikes.length >= 20
       fail 'Rack is full!'
     end
     @bikes << bike
